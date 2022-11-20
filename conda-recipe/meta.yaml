@@ -19,26 +19,26 @@ requirements:
     - numpy
   run:
     - python>=3.7
-    - ambertools>=17.6
+    - ambertools
     - beautifulsoup4
-    - biopython=1.76
-    - biosimspace>=2019.2.0
+    - biopython
+    - biosimspace
     - geckodriver
     - libcblas
-    - libnetcdf=4.6.2
+    - libnetcdf
     - mdanalysis
     - numpy
     - openbabel=2.4.1
-    - parmed>=3.1.0
-    - pdb2pqr=3.1.0
-    - pdbfixer>=1.5
+    - parmed
+    - pdb2pqr
+    - pdbfixer
     - pygtail
     - pymbar
     - rdkit
     - requests
     - selenium
     - selenium-requests
-    - sire=2019.2.0
+    - sire
 
 test:
   requires:
