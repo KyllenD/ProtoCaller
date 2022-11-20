@@ -130,23 +130,23 @@ def solvate(complex, params=None, box_length=8, shell=0, neutralise=True, ion_co
             _protocol.Protocol(use_preset="default").write("GROMACS", "ions")
 
             # neutralise if needed
-            charge = chargefunc(complex) if neutralise else 0
-            volume = box_length[0] * box_length[1] * box_length[2] * 10 ** -24
-            n_Na, n_Cl = [int(volume * 6.022 * 10 ** 23 * ion_conc) - abs(charge) // 2] * 2
-            if neutralise:
-                if charge < 0:
-                    n_Na -= charge
-                else:
-                    n_Cl += charge
+            #charge = chargefunc(complex) if neutralise else 0
+            #volume = box_length[0] * box_length[1] * box_length[2] * 10 ** -24
+            #n_Na, n_Cl = [int(volume * 6.022 * 10 ** 23 * ion_conc) - abs(charge) // 2] * 2
+            #if neutralise:
+            #    if charge < 0:
+            #        n_Na -= charge
+            #    else:
+            #       n_Cl += charge
 
-            # add ions with gmx genion
+            # add ions to neutralize with gmx genion 
             ions_prep_filenames = [filebase + "_ions.top", filebase + "_ions.gro"]
             command = "{0} grompp -f ions.mdp -p {1} -c {2} -o \"{3}_solvated.tpr\"".format(
                 _PC.GROMACSEXE, *waters_prep_filenames, filebase)
             _runexternal.runExternal(command, procname="gmx grompp")
 
-            command = "{{ echo 2; }} | {0} genion -s \"{1}_solvated.tpr\" -o \"{2}\" -nn {3} -np {4}".format(
-                _PC.GROMACSEXE, filebase, ions_prep_filenames[1], n_Cl, n_Na)
+            command = "{{ echo 2; }} | {0} genion -s \"{1}_solvated.tpr\" -o \"{2}\" -neutral".format(
+                _PC.GROMACSEXE, filebase, ions_prep_filenames[1])
             _runexternal.runExternal(command, procname="gmx genion")
 
             # prepare waters for tleap
