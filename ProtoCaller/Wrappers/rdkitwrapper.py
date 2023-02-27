@@ -5,6 +5,7 @@ import sys as _sys
 import warnings as _warnings
 
 import numpy as _np
+import rdkit
 from rdkit import Chem as _Chem
 from rdkit.Chem import AllChem as _AllChem
 from rdkit.Chem import rdForceFieldHelpers as _FF
@@ -340,7 +341,7 @@ def getMCSMap(ref, mol, atomCompare="any", bondCompare="any", **kwargs):
         bonds).
     kwargs
         Additional keyword arguments passed on to getFixedMCS() or to
-        rdkit.Chem.MCS.FindMCS().
+        rdkit.Chem.rdFMCS.FindMCS().
 
     Returns
     -------
@@ -1465,7 +1466,7 @@ def _matchAndReturnMatches(*args, **kwargs):
     transformed_indices : [int]
         Transformed indices.
     """
-    mcs_string = _MCS.FindMCS(*args, **kwargs).smarts
+    mcs_string = rdkit.Chem.MCS.FindMCS(*args, **kwargs).smarts
     if mcs_string is None:
         return None, [], []
     mcs_smarts = _Chem.MolFromSmarts(mcs_string)

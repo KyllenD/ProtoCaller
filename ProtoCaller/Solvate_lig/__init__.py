@@ -145,8 +145,8 @@ def solvate(complex, params=None, box_length=8, shell=0, neutralise=True, ion_co
                 _PC.GROMACSEXE, *waters_prep_filenames, filebase)
             _runexternal.runExternal(command, procname="gmx grompp")
 
-            command = "{{ echo 2; }} | {0} genion -s \"{1}_solvated.tpr\" -o \"{2}\" -nn {3} -np {4}".format(
-                _PC.GROMACSEXE, filebase, ions_prep_filenames[1],n_Cl,n_Na)
+            command = "{{ echo 2; }} | {0} genion -s \"{1}_solvated.tpr\" -o \"{2}\" -pname NA -nname CL -neutral -conc 0.154 -seed 0".format(
+                _PC.GROMACSEXE, filebase, ions_prep_filenames[1])
             _runexternal.runExternal(command, procname="gmx genion")
 
             # prepare waters for tleap

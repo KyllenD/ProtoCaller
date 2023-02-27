@@ -3,7 +3,7 @@ import os as _os
 import warnings as _warnings
 
 import pdbfixer as _pdbfix
-from simtk.openmm.app import PDBFile as _PDBFile
+from openmm.app import PDBFile as _PDBFile
 
 from ProtoCaller.IO.PDB import PDB as _PDB
 
