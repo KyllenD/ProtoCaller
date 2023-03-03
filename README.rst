@@ -21,12 +21,6 @@ This package is distributed via Conda. To install it, run the following command:
 
     conda install -c conda-forge -c omnia -c michellab -c kdilsook protocaller
 
-The development version can be installed with this command (use with caution):
-
-.. code-block:: bash
-
-    conda install -c conda-forge -c omnia -c michellab -c essexlab/label/dev protocaller
-
 The newest version (1.2.0) is highly recommended due to recent database overhauls in the Protein Data Bank.
 
 
