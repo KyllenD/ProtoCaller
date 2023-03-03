@@ -8,10 +8,10 @@ import re as _re
 import warnings as _warnings
 
 import BioSimSpace as _BSS
-import sire.mm as _SireMM
-import sire.maths as _SireMaths
-import sire.mol as _SireMol
-import sire.vol as _SireVol
+import Sire.MM as _SireMM
+import Sire.Maths as _SireMaths
+import Sire.Mol as _SireMol
+import Sire.Vol as _SireVol
 
 
 def centre(system, box_length):
