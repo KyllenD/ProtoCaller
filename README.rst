@@ -19,7 +19,7 @@ This package is distributed via Conda. To install it, run the following command:
 
 .. code-block:: bash
 
-    conda install -c conda-forge -c omnia -c michellab -c essexlab protocaller
+    conda install -c conda-forge -c omnia -c michellab -c kdilsook protocaller
 
 The development version can be installed with this command (use with caution):
 
