@@ -1,5 +1,5 @@
 import ProtoCaller as _PC
-import re
+
 from collections.abc import Iterable as _Iterable
 import fileinput as _fileinput
 import os as _os
@@ -61,7 +61,7 @@ def solvate(complex, params=None, box_length=8, shell=0, neutralise=True, ion_co
         if isinstance(complex, _BSS._SireWrappers._molecule.Molecule):
             complex = complex.toSystem()
         centrefunc = _BSSwrap.centre
-        chargefunc = lambda x: x.charge()
+        chargefunc = lambda x: round(x.charge().magnitude())
         readfunc = _BSS.IO.readMolecules
     else:
         raise TypeError("Cannot solvate object of type %s" % type(complex))
@@ -130,7 +130,8 @@ def solvate(complex, params=None, box_length=8, shell=0, neutralise=True, ion_co
             _protocol.Protocol(use_preset="default").write("GROMACS", "ions")
 
             # neutralise if needed
-            charge = round(int(re.search(r'\d+',str(chargefunc(complex))).group())) if neutralise else 0
+            #charge = chargefunc(complex) if neutralise else 0
+            charge = 0
             volume = box_length[0] * box_length[1] * box_length[2] * 10 ** -24
             n_Na, n_Cl = [int(volume * 6.022 * 10 ** 23 * ion_conc) - abs(charge) // 2] * 2
             if neutralise:
@@ -145,8 +146,8 @@ def solvate(complex, params=None, box_length=8, shell=0, neutralise=True, ion_co
                 _PC.GROMACSEXE, *waters_prep_filenames, filebase)
             _runexternal.runExternal(command, procname="gmx grompp")
 
-            command = "{{ echo 2; }} | {0} genion -s \"{1}_solvated.tpr\" -o \"{2}\" -nn {3} -np {4}".format(
-                _PC.GROMACSEXE, filebase, ions_prep_filenames[1],n_Cl,n_Na)
+            command = "{{ echo 2; }} | {0} genion -s \"{1}_solvated.tpr\" -o \"{2}\" -neutral".format(
+                _PC.GROMACSEXE, filebase, ions_prep_filenames[1])
             _runexternal.runExternal(command, procname="gmx genion")
 
             # prepare waters for tleap

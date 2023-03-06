@@ -19,7 +19,6 @@ from .Protein import Protein
 import ProtoCaller.IO as _IO
 import ProtoCaller.Parametrise as _parametrise
 import ProtoCaller.Solvate as _solvate
-import ProtoCaller.Solvate_lig as _solvate_lig
 import ProtoCaller.Utils.fileio as _fileio
 import ProtoCaller.Wrappers.biosimspacewrapper as _BSSwrap
 
@@ -239,7 +238,7 @@ class Ensemble:
                     complexes = [_solvate.solvate(complexes[0], self.params, box_length=self.box_length_complex,
                                                   shell=self.shell, neutralise=self.neutralise, ion_conc=self.ion_conc,
                                                   centre=self.centre, work_dir=curdir.path, filebase="complex")]
-                    morph_sol = _solvate_lig.solvate(morph_BSS, self.params,
+                    morph_sol = _solvate.solvate(morph_BSS, self.params,
                                                  box_length=self.box_length_morph, shell=self.shell,
                                                  neutralise=self.neutralise, ion_conc=self.ion_conc, centre=self.centre,
                                                  work_dir=curdir.path, filebase="morph")
