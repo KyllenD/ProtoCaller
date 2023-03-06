@@ -238,7 +238,7 @@ class Ensemble:
                     complexes = [_solvate.solvate(complexes[0], self.params, box_length=self.box_length_complex,
                                                   shell=self.shell, neutralise=self.neutralise, ion_conc=self.ion_conc,
                                                   centre=self.centre, work_dir=curdir.path, filebase="complex")]
-                    morph_sol = _solvate.solvate(morph_BSS, self.params,
+                    morph_sol = _solvate.solvate_lig(morph_BSS, self.params,
                                                  box_length=self.box_length_morph, shell=self.shell,
                                                  neutralise=self.neutralise, ion_conc=self.ion_conc, centre=self.centre,
                                                  work_dir=curdir.path, filebase="morph")
