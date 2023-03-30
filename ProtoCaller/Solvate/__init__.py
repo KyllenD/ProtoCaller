@@ -4,7 +4,7 @@ from collections.abc import Iterable as _Iterable
 import fileinput as _fileinput
 import os as _os
 import tempfile as _tempfile
-
+import re
 if _PC.BIOSIMSPACE:
     import BioSimSpace as _BSS
     import ProtoCaller.Wrappers.biosimspacewrapper as _BSSwrap
